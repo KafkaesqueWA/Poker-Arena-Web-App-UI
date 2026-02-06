@@ -226,6 +226,13 @@ export function PokerTableScreen({
     }
   }, []); // Empty dependency array - only run once on mount
 
+  // Seed action log from existing hand history if present
+  useEffect(() => {
+    if (actionLog.length === 0 && handHistory.currentHandActions.length > 0) {
+      seedActionLog(handHistory.currentHandActions);
+    }
+  }, [actionLog.length, handHistory.currentHandActions]);
+
   // Handle AI turns
   useEffect(() => {
     const currentPlayer = gameState.players[gameState.currentPlayerIndex];
@@ -783,7 +790,7 @@ export function PokerTableScreen({
       {/* Main Game Area */}
       <div className="flex-1 flex">
         {/* Poker Table */}
-        <div className="flex-1 flex items-center justify-center p-5">
+        <div className="flex-1 flex items-center justify-center p-5 self-start">
           <div className="relative w-full max-w-3xl">
             
             {/* Player 2 Seat & Cards (Top - Outside Table) */}
@@ -897,7 +904,7 @@ export function PokerTableScreen({
         </div>
 
         {/* Action Log Sidebar */}
-        <div className="w-80 bg-black border-l-2 border-cyan-500 p-6">
+        <div className="w-80 bg-black border-l-2 border-cyan-500 p-6 self-stretch">
           <ActionLog entries={actionLog} className="h-full" />
         </div>
       </div>
