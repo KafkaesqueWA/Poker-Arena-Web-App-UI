@@ -79,16 +79,23 @@ export function startNewHand(
   const buttonIndex = newState.players[0].isButton ? 0 : 1;
   const bbIndex = buttonIndex === 0 ? 1 : 0;
 
-  // Post blinds
-  newState.players[buttonIndex].bet = newState.smallBlind;
-  newState.players[buttonIndex].stack -= newState.smallBlind;
-  newState.players[bbIndex].bet = newState.bigBlind;
-  newState.players[bbIndex].stack -= newState.bigBlind;
-  newState.pot = newState.smallBlind + newState.bigBlind;
+  // Post blinds (cap by remaining stacks)
+  const sbAmount = Math.min(
+    newState.smallBlind,
+    newState.players[buttonIndex].stack,
+  );
+  const bbAmount = Math.min(
+    newState.bigBlind,
+    newState.players[bbIndex].stack,
+  );
+  newState.players[buttonIndex].bet = sbAmount;
+  newState.players[buttonIndex].stack -= sbAmount;
+  newState.players[bbIndex].bet = bbAmount;
+  newState.players[bbIndex].stack -= bbAmount;
+  newState.pot = sbAmount + bbAmount;
 
-  // Set last raise amount for preflop (difference between BB and SB for heads-up)
-  newState.lastRaiseAmount =
-    newState.bigBlind - newState.smallBlind;
+  // Set last raise amount for preflop using actual posted blinds
+  newState.lastRaiseAmount = bbAmount - sbAmount;
 
   // Deal cards
   newState.players[0].cards = [

@@ -30,8 +30,8 @@ export function Card({ suit, rank, faceDown = false, className = '' }: CardProps
 
   if (faceDown) {
     return (
-      <div className={`w-14 h-20 bg-gradient-to-br from-blue-900 to-blue-950 border-2 border-cyan-500 flex items-center justify-center shadow-md ${className}`}>
-        <div className="w-8 h-12 border-2 border-cyan-400/50"></div>
+      <div className={`w-12 h-16 bg-gradient-to-br from-blue-900 to-blue-950 border-2 border-cyan-500 flex items-center justify-center shadow-md ${className}`}>
+        <div className="w-7 h-10 border-2 border-cyan-400/50"></div>
       </div>
     );
   }
@@ -39,11 +39,11 @@ export function Card({ suit, rank, faceDown = false, className = '' }: CardProps
   const suitColor = getSuitColor(suit);
 
   return (
-    <div className={`w-14 h-20 bg-black border-2 p-1.5 shadow-md flex flex-col ${className}`} style={{ borderColor: suitColor }}>
-      <div className="text-lg font-bold leading-none" style={{ color: suitColor }}>
+    <div className={`w-12 h-16 bg-black border-2 p-1 shadow-md flex flex-col ${className}`} style={{ borderColor: suitColor }}>
+      <div className="text-base font-bold leading-none" style={{ color: suitColor }}>
         {rank}
       </div>
-      <div className="text-2xl leading-none mt-0.5" style={{ color: suitColor }}>
+      <div className="text-xl leading-none mt-0.5" style={{ color: suitColor }}>
         {getSuitSymbol(suit || '')}
       </div>
     </div>

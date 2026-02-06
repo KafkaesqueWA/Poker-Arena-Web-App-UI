@@ -19,7 +19,7 @@ export function TableMini({ gameState, tableIndex }: TableMiniProps) {
     : 'border-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.3)]';
 
   return (
-    <div className={`bg-black border-2 p-3 relative ${dimClass}`}>
+    <div className={`bg-black border-2 p-3 relative overflow-hidden ${dimClass}`}>
       <div className="absolute left-1/2 -translate-x-1/2 top-2 text-xs uppercase tracking-widest text-cyan-400">
         Hand #{gameState.handNumber}
       </div>

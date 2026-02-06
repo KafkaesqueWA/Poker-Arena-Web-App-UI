@@ -3,7 +3,7 @@ import { BotDefinition } from "./types";
 
 export const warrenBot: BotDefinition = {
   id: "warren",
-  name: "Warren's AI (Testing)",
+  name: "Warren's bot",
   decide: (state, playerIndex, rng) =>
     getAdvancedAIAction(state, playerIndex, undefined, rng),
 };

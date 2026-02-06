@@ -154,6 +154,24 @@ export function runHeadsUpEdgeCaseChecks(): HeadsUpEdgeCaseResult[] {
     awardedSplit.players[0].stack === 56 &&
     awardedSplit.players[1].stack === 55;
 
+  // Edge case 8: Blinds should not push stacks negative
+  const lowStackSettings: GameSettings = {
+    playerName: "P1",
+    player2Name: "P2",
+    player1Type: "ai",
+    player2Type: "ai",
+    startingStack: 1,
+    smallBlind: 5,
+    bigBlind: 10,
+  };
+  const lowStackState = startNewHand(
+    initializeGame(lowStackSettings),
+    createSeededRng(2),
+  );
+  const lowStackPass =
+    lowStackState.players[0].stack >= 0 &&
+    lowStackState.players[1].stack >= 0;
+
   return [
     {
       name: "Wheel straight loses to higher straight",
@@ -189,6 +207,11 @@ export function runHeadsUpEdgeCaseChecks(): HeadsUpEdgeCaseResult[] {
       name: "Odd chip goes to button on split",
       passed: splitPass,
       details: `expected stacks 56/55, got ${awardedSplit.players[0].stack}/${awardedSplit.players[1].stack}`,
+    },
+    {
+      name: "Blinds do not create negative stacks",
+      passed: lowStackPass,
+      details: `stacks ${lowStackState.players[0].stack}/${lowStackState.players[1].stack}`,
     },
   ];
 }
