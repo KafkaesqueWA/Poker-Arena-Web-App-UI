@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { LobbyScreen, GameSettings } from './components/LobbyScreen';
 import { MultiTableScreen } from './components/MultiTableScreen';
+import { PokerTableScreen } from './components/PokerTableScreen';
 import { HandHistoryScreen } from './components/HandHistoryScreen';
 import { DevScreen } from './components/DevScreen';
 import {
   HandHistoryManager,
+  createHandHistoryManager,
   addActionToCurrentHand,
   GameState,
   initializeGame,
@@ -130,16 +132,43 @@ export default function App() {
         <LobbyScreen onStartMatch={handleStartMatch} onOpenDev={handleOpenDev} />
       )}
       {currentScreen === 'game' && (
-        <MultiTableScreen 
-          key={matchId}
-          settings={gameSettings} 
-          rngs={rngsRef.current}
-          tables={tables}
-          onUpdateTables={setTables}
-          onExit={handleExitGame}
-          onViewHistory={handleViewHistory}
-          onReplayMatch={handleReplayMatch}
-        />
+        gameSettings.tablesCount === 1 ? (
+          <PokerTableScreen
+            settings={gameSettings}
+            rng={rngsRef.current[0]}
+            onExit={handleExitGame}
+            onViewHistory={handleViewHistory}
+            handHistory={tables[0]?.history ?? createHandHistoryManager()}
+            onUpdateHistory={(history) =>
+              setTables((prev) => {
+                if (!prev[0]) return prev;
+                const next = [...prev];
+                next[0] = { ...next[0], history };
+                return next;
+              })
+            }
+            gameState={tables[0]?.gameState ?? null}
+            onUpdateGameState={(state) =>
+              setTables((prev) => {
+                if (!prev[0]) return prev;
+                const next = [...prev];
+                next[0] = { ...next[0], gameState: state };
+                return next;
+              })
+            }
+          />
+        ) : (
+          <MultiTableScreen 
+            key={matchId}
+            settings={gameSettings} 
+            rngs={rngsRef.current}
+            tables={tables}
+            onUpdateTables={setTables}
+            onExit={handleExitGame}
+            onViewHistory={handleViewHistory}
+            onReplayMatch={handleReplayMatch}
+          />
+        )
       )}
       {currentScreen === 'history' && (
         <HandHistoryScreen 
