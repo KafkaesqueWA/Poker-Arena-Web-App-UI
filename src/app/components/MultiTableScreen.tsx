@@ -80,6 +80,9 @@ export function MultiTableScreen({
     },
     { player1: 0, player2: 0 },
   );
+  const activeTables = tables.filter(
+    (table) => !table.gameState.gameOver,
+  ).length;
   const overallWinner =
     winCounts.player1 === winCounts.player2
       ? null
@@ -91,11 +94,6 @@ export function MultiTableScreen({
   const playerNames = tables.length
     ? tables[0].gameState.players.map((player) => player.name)
     : ["Player 1", "Player 2"];
-
-  const columns = Math.min(
-    10,
-    Math.max(1, Math.round(Math.sqrt(tables.length || 1))),
-  );
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
@@ -153,8 +151,15 @@ export function MultiTableScreen({
             <span>Exit</span>
           </button>
 
-          <div className="text-cyan-400 uppercase tracking-widest">
-            Multi-Table Simulation
+          <div className="flex flex-col items-center">
+            <div className="text-cyan-400 uppercase tracking-widest">
+              Multi-Table Simulation
+            </div>
+            {tables.length > 0 && (
+              <div className="text-cyan-400 uppercase tracking-widest text-xs mt-1">
+                {playerNames[0]}: <span className="text-green-400">{winCounts.player1}</span> • {playerNames[1]}: <span className="text-green-400">{winCounts.player2}</span> • Active: <span className="text-green-400">{activeTables}</span>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-4">
@@ -176,7 +181,7 @@ export function MultiTableScreen({
         <div
           className="grid gap-4"
           style={{
-            gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           }}
         >
           {tables.map((table, idx) => (

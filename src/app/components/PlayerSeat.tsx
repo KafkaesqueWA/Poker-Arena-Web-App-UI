@@ -38,21 +38,21 @@ export function PlayerSeat({
   return (
     <div className={`relative ${className}`}>
       {/* Player Info Panel */}
-      <div className={`bg-black p-4 border-2 ${getBorderStyle()} min-w-[200px] ${getTextOpacity()}`}>
-        <div className="flex items-center justify-between mb-2">
+      <div className={`bg-black p-3 border-2 ${getBorderStyle()} min-w-[170px] ${getTextOpacity()}`}>
+        <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
             {isDealer && (
-              <div className="w-6 h-6 bg-yellow-400 text-black flex items-center justify-center text-xs font-bold border border-yellow-300">
+              <div className="w-5 h-5 bg-yellow-400 text-black flex items-center justify-center text-[10px] font-bold border border-yellow-300">
                 D
               </div>
             )}
-            <span className="text-cyan-400 font-medium uppercase tracking-wide">{name}</span>
+            <span className="text-cyan-400 text-sm font-medium uppercase tracking-wide">{name}</span>
           </div>
           {isActive && !hasFolded && (
             <div className="w-2 h-2 bg-green-500 animate-pulse"></div>
           )}
         </div>
-        <div className="text-green-400 text-xl font-semibold font-mono">${stack.toLocaleString()}</div>
+        <div className="text-green-400 text-lg font-semibold font-mono">${stack.toLocaleString()}</div>
       </div>
     </div>
   );

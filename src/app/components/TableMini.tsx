@@ -44,7 +44,7 @@ export function TableMini({ gameState, tableIndex }: TableMiniProps) {
           ))}
         </div>
         <div className="relative h-24">
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 scale-75 origin-top-left">
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 scale-75 origin-top">
             <CommunityCards cards={toCardPropsList(gameState.communityCards)} />
           </div>
         </div>

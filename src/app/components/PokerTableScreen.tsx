@@ -783,11 +783,11 @@ export function PokerTableScreen({
       {/* Main Game Area */}
       <div className="flex-1 flex">
         {/* Poker Table */}
-        <div className="flex-1 flex items-center justify-center p-8">
-          <div className="relative w-full max-w-5xl">
+        <div className="flex-1 flex items-center justify-center p-5">
+          <div className="relative w-full max-w-3xl">
             
             {/* Player 2 Seat & Cards (Top - Outside Table) */}
-            <div className="flex flex-col items-center gap-3 mb-6">
+            <div className="flex flex-col items-center gap-2 mb-3">
               <PlayerSeat
                 name={player2.name}
                 stack={player2.stack}
@@ -799,43 +799,43 @@ export function PokerTableScreen({
               {/* Player 2 Cards */}
               <div className="flex gap-2">
                 {player2.cards.map((card, idx) => (
-                  <Card key={idx} {...toCardProps(card)} />
+                  <Card key={idx} {...toCardProps(card)} className="scale-90 origin-top-left" />
                 ))}
               </div>
             </div>
 
             {/* Poker Table Felt */}
-            <div className="relative bg-gradient-to-br from-felt-700 to-felt-800 rounded-[200px] border-8 border-felt-900 shadow-2xl px-16 py-20 min-h-[420px]">
+            <div className="relative bg-gradient-to-br from-felt-700 to-felt-800 rounded-[160px] border-8 border-felt-900 shadow-2xl px-10 py-14 min-h-[320px]">
               
               {/* Player 2 Bet (On Table, Top) */}
               {player2.bet > 0 && (
-                <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-black px-4 py-2 border-2 border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.5)]">
-                  <div className="text-yellow-400 font-semibold font-mono">${player2.bet.toLocaleString()}</div>
+                <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-black px-3 py-1 border-2 border-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.4)]">
+                  <div className="text-yellow-400 text-sm font-semibold font-mono">${player2.bet.toLocaleString()}</div>
                 </div>
               )}
 
               {/* Community Cards & Pot */}
-              <div className="flex flex-col items-center justify-center gap-6 h-full">
+              <div className="flex items-center justify-center gap-4 h-full pt-12">
+                <PotDisplay amount={gameState.pot} />
                 <CommunityCards
                   cards={toCardPropsList(gameState.communityCards)}
                 />
-                <PotDisplay amount={gameState.pot} />
               </div>
 
               {/* Player 1 Bet (On Table, Bottom) */}
               {player1.bet > 0 && (
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black px-4 py-2 border-2 border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.5)]">
-                  <div className="text-yellow-400 font-semibold font-mono">${player1.bet.toLocaleString()}</div>
+                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-black px-3 py-1 border-2 border-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.4)]">
+                  <div className="text-yellow-400 text-sm font-semibold font-mono">${player1.bet.toLocaleString()}</div>
                 </div>
               )}
             </div>
 
             {/* Player 1 Seat & Cards (Bottom - Outside Table) */}
-            <div className="flex flex-col items-center gap-3 mt-6">
+            <div className="flex flex-col items-center gap-2 mt-3">
               {/* Player 1 Cards */}
               <div className="flex gap-2">
                 {player1.cards.map((card, idx) => (
-                  <Card key={idx} {...toCardProps(card)} />
+                  <Card key={idx} {...toCardProps(card)} className="scale-90 origin-top-left" />
                 ))}
               </div>
               <PlayerSeat
@@ -849,7 +849,7 @@ export function PokerTableScreen({
             </div>
 
             {/* Action Controls */}
-            <div className="mt-8">
+            <div className="mt-6">
               {showBettingSlider ? (
                 <BettingSlider
                   min={validActions.minRaise}

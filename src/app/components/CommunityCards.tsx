@@ -9,7 +9,7 @@ export interface CommunityCardsProps {
 export function CommunityCards({ cards, className = '' }: CommunityCardsProps) {
   // Only render actual cards that have been dealt
   return (
-    <div className={`flex gap-2 ${className}`}>
+    <div className={`flex gap-2 justify-center ${className}`}>
       {cards.map((card, idx) => (
         <Card key={idx} {...card} />
       ))}

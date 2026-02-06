@@ -230,16 +230,21 @@ export function LobbyScreen({ onStartMatch, onOpenDev }: LobbyScreenProps) {
                 className="w-full bg-black text-green-400 px-4 py-2 border-2 focus:outline-none focus:border-green-500 font-mono"
                 style={{ borderColor: '#d946ef' }}
               >
-                <option value={1}>1 (1x1)</option>
-                <option value={4}>4 (2x2)</option>
-                <option value={9}>9 (3x3)</option>
-                <option value={16}>16 (4x4)</option>
-                <option value={25}>25 (5x5)</option>
-                <option value={36}>36 (6x6)</option>
-                <option value={49}>49 (7x7)</option>
-                <option value={64}>64 (8x8)</option>
-                <option value={81}>81 (9x9)</option>
-                <option value={100}>100 (10x10)</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={30}>30</option>
+                <option value={40}>40</option>
+                <option value={50}>50</option>
+                <option value={60}>60</option>
+                <option value={70}>70</option>
+                <option value={80}>80</option>
+                <option value={90}>90</option>
+                <option value={100}>100</option>
               </select>
             </div>
             <div>
